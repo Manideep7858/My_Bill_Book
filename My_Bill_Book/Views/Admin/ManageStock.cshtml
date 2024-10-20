@@ -1,0 +1,44 @@
+﻿@model IEnumerable<My_Bill_Book.Models.Product>
+
+@{
+    ViewBag.Title = "Manage Stock";
+}
+
+<h2>Manage Stock</h2>
+
+<p>
+    <a href="@Url.Action("CreateProduct", "Admin")" class="btn btn-primary">Add New Product</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Category.Name)
+                </td>
+                <td>
+                    <a href="@Url.Action("EditProduct", "Admin", new { id = product.Id })" class="btn btn-warning">Edit</a>
+                    |
+                    <a href="@Url.Action("UpdateStock", "Admin", new { id = product.Id })" class="btn btn-success">Update Stock</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

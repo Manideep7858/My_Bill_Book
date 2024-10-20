@@ -1,0 +1,38 @@
+﻿@model IEnumerable<My_Bill_Book.Models.Category>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Categories")" class="btn btn-primary">Create New Category</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Categories", new { id = item.Id })" class="btn btn-warning">Edit</a>
+                    |
+                    <a href="@Url.Action("Delete", "Categories", new { id = item.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,40 @@
+﻿@model My_Bill_Book.Models.Sale
+
+<h2>Create Bill</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="CustomerId">Customer</label>
+        <select asp-for="CustomerId" asp-items="@(new SelectList(ViewBag.Customers, "Id", "Name"))" class="form-control"></select>
+    </div>
+
+    <div id="items">
+        <div class="item">
+            <select name="saleItems[0].ProductId" asp-items="@(new SelectList(ViewBag.Products, "Id", "Name"))" class="form-control"></select>
+            <input type="number" name="saleItems[0].Quantity" class="form-control" placeholder="Quantity" />
+            <input type="number" name="saleItems[0].UnitPrice" class="form-control" placeholder="Unit Price" />
+        </div>
+    </div>
+
+    <button type="button" id="addItem">Add Item</button>
+
+    <div class="form-group">
+        <input type="submit" value="Create Bill" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var itemCount = 1;
+            $("#addItem").click(function () {
+                var newItem = $(".item").first().clone();
+                newItem.find("select").attr("name", "saleItems[" + itemCount + "].ProductId");
+                newItem.find("input").first().attr("name", "saleItems[" + itemCount + "].Quantity").val("");
+                newItem.find("input").last().attr("name", "saleItems[" + itemCount + "].UnitPrice").val("");
+                $("#items").append(newItem);
+                itemCount++;
+            });
+        });
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2>Admin Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Sales</h5>
+                <p class="card-text">@ViewBag.TotalSales.ToString("C")</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total Products</h5>
+                <p class="card-text">@ViewBag.TotalProducts</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Low Stock Items</h5>
+                <p class="card-text">@ViewBag.LowStockItems.Count</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Low Stock Items</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.LowStockItems)
+        {
+            <tr>
+                <td>@item.Product.Name</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="ManageUsers" class="btn btn-primary">Manage Users</a>
+    <a asp-action="ManageStock" class="btn btn-primary">Manage Stock</a>
+    <a asp-controller="Reports" asp-action="SalesReport" class="btn btn-primary">Sales Report</a>
+    <a asp-controller="Reports" asp-action="StockReport" class="btn btn-primary">Stock Report</a>
+</div>
